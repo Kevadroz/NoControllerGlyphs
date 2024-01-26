@@ -7,15 +7,15 @@ using namespace geode::prelude;
 
 
 std::unordered_set<std::string> cGlyphs = {
-	// Reference only "controllerBtn_DPad_Left_001.png",
-	// Reference only "controllerBtn_DPad_Right_001.png",
-	"controllerBtn_Start_001.png",
-	"controllerBtn_B_001.png",
-	"controllerBtn_X_001.png",
-	"controllerBtn_RThumb_001.png",
 	"controllerBtn_A_001.png",
-	"controllerBtn_LThumb_001.png",
+	"controllerBtn_B_001.png",
 	"controllerBtn_DPad_Down_001.png",
+	"controllerBtn_DPad_Left_001.png",	// Reference
+	"controllerBtn_DPad_Right_001.png",	// Reference
+	"controllerBtn_LThumb_001.png",
+	"controllerBtn_RThumb_001.png",
+	"controllerBtn_Start_001.png",
+	"controllerBtn_X_001.png",
 	"controllerBtn_Y_001.png"
 };
 
@@ -65,11 +65,27 @@ bool init() {
 };
 
 
-// Does not work
-class $modify(GameToolbox) {
+// Bindings do not exist
+// class $modify(GameToolbox) {
 
-static void addRThumbScrollButton(CCLayer* param_1) {
-	return; // Removed
+// static void addRThumbScrollButton(CCLayer* param_1) {
+// 	return; // Removed
+// }
+
+// };
+
+
+// Manual hook
+void GameToolbox_addRThumbScrollButton() {
+	return;
 }
 
-};
+// While bindings for this function do not exist this is here
+$execute {
+	Mod::get()->hook(
+		reinterpret_cast<void*>(geode::base::get() + 0x419c0),
+		&GameToolbox_addRThumbScrollButton,
+		"GameToolbox::addRThumbScrollButton",
+		tulip::hook::TulipConvention::Thiscall
+	);
+}
