@@ -7,16 +7,16 @@ using namespace geode::prelude;
 
 
 std::unordered_set<std::string> cGlyphs = {
+	"controllerBtn_Start_001.png",
 	"controllerBtn_A_001.png",
 	"controllerBtn_B_001.png",
+	"controllerBtn_X_001.png",
+	"controllerBtn_Y_001.png",
 	"controllerBtn_DPad_Down_001.png",
 	"controllerBtn_DPad_Left_001.png",	// Reference
 	"controllerBtn_DPad_Right_001.png",	// Reference
 	"controllerBtn_LThumb_001.png",
-	"controllerBtn_RThumb_001.png",
-	"controllerBtn_Start_001.png",
-	"controllerBtn_X_001.png",
-	"controllerBtn_Y_001.png"
+	"controllerBtn_RThumb_001.png"
 };
 
 
@@ -68,8 +68,10 @@ class $modify(MenuLayer) {
 		if (!MenuLayer::init())
 			return false;
 
-		this->getChildByID("mouse-gamepad-label")->setVisible(false);
-		this->getChildByID("click-gamepad-label")->setVisible(false);
+		if (auto* mouseLabel = this->getChildByID("mouse-gamepad-label"))
+			mouseLabel->setVisible(false);
+		if (auto* clickLabel = this->getChildByID("click-gamepad-label"))
+			clickLabel->setVisible(false);
 
 		return true;
 	}
