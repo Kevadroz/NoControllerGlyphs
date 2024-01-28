@@ -37,8 +37,8 @@ class $modify(CCSprite) {
 			} else {
 				sprite = CCSprite::createWithSpriteFrameName(pszSpriteFrameName);
 
-			if (cGlyphs.find(pszSpriteFrameName) != cGlyphs.end())
-				sprite->setVisible(false);
+				if (cGlyphs.find(pszSpriteFrameName) != cGlyphs.end())
+					sprite->setVisible(false);
 				
 			}
 
